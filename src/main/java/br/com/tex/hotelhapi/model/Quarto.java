@@ -1,5 +1,6 @@
 package br.com.tex.hotelhapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,5 +20,6 @@ public class Quarto {
     private String nome;
     private BigDecimal preco;
     @ManyToOne
+    @JsonBackReference
     private Hotel hotel;
 }

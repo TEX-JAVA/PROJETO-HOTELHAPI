@@ -1,5 +1,7 @@
 package br.com.tex.hotelhapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,14 +25,18 @@ public class Reserva {
     private Integer qtdPessoas;
     private BigDecimal total;
     @ManyToOne
+    @JsonBackReference
     private Hotel hotel;
     @ManyToOne
+    @JsonBackReference
     private Usuario usuario;
     @ManyToOne
+    @JsonBackReference
     private Quarto quarto;
     @ManyToMany
     @JoinTable(name = "reservas_servicos",
             joinColumns = @JoinColumn(name = "reserva_id"),
             inverseJoinColumns = @JoinColumn(name = "servico_id"))
+    @JsonManagedReference
     private List<Servico> servicos;
 }

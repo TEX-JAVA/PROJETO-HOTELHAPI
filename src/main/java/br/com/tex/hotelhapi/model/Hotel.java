@@ -1,5 +1,6 @@
 package br.com.tex.hotelhapi.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +20,12 @@ public class Hotel {
     private String nome;
     private String endereco;
     @OneToMany(mappedBy = "hotel")
+    @JsonManagedReference
     private List<Reserva> reservas;
     @OneToMany(mappedBy = "hotel")
+    @JsonManagedReference
     private List<Quarto>quartos;
     @OneToMany(mappedBy = "hotel")
+    @JsonManagedReference
     private List<Servico>servicos;
 }
