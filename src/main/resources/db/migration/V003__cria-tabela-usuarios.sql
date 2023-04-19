@@ -3,6 +3,6 @@ create table usuarios(
     nome varchar(255),
     email varchar(255),
     senha varchar(255),
-    classeUsuario_id int not null,
-    foreign key (classeUsuario_id) references classesUsuarios(id)
+    classe_usuario_id int not null,
+    foreign key (classe_usuario_id) references classes_usuarios(id)
 )

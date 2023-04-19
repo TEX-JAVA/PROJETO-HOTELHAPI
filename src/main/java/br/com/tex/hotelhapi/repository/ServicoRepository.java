@@ -1,4 +1,6 @@
 package br.com.tex.hotelhapi.repository;
-//
-//public interface ServicoRepository {
-//}
+
+import br.com.tex.hotelhapi.model.Servico;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ServicoRepository extends JpaRepository<Servico, Integer> {}

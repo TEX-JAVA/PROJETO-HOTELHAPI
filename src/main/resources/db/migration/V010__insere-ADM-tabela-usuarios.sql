@@ -1,0 +1,1 @@
+insert into usuarios (nome, email, senha, classe_usuario_id) values('Davi', 'davi@gmail.com', '123', 1);
