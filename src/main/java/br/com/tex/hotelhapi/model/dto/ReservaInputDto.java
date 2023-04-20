@@ -37,6 +37,7 @@ public class ReservaInputDto {
 
     public Reserva toReserva(Hotel hotel, Usuario usuario, Quarto quarto){
         List<Servico> servicos = new ArrayList<>();
+
         if(this.servicos != null){
             for(ServicoRerservaInputDto servicoDto : this.servicos){
                 servicos.add(servicoDto.toServicoParaReserva());

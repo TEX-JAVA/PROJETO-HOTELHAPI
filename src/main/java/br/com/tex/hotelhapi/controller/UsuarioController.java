@@ -42,13 +42,6 @@ public class UsuarioController {
                 .created(uriBuilder.path("/usuarios/{id}").buildAndExpand(salvo.getId()).toUri())
                 .body(new UsuarioOutputDto(salvo));
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletaPor(@PathVariable int id){
-        Usuario usuario = this.usuarioRepository.getReferenceById(id);
-        this.usuarioRepository.deleteById(usuario.getId());
-
-        return ResponseEntity.ok().build();
-    }
     @PutMapping("/{id}")
     public ResponseEntity altera(@PathVariable int id, @RequestBody UsuarioInputDto dto){
         this.usuarioRepository.getReferenceById(id);
@@ -57,6 +50,13 @@ public class UsuarioController {
         Usuario alterado = this.usuarioRepository.save(usuario);
 
         return ResponseEntity.ok(new UsuarioOutputDto(alterado));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletaPor(@PathVariable int id){
+        Usuario usuario = this.usuarioRepository.getReferenceById(id);
+        this.usuarioRepository.deleteById(usuario.getId());
+
+        return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}/reservas")
     public ResponseEntity buscaReservaPorUsuario(@PathVariable int id){

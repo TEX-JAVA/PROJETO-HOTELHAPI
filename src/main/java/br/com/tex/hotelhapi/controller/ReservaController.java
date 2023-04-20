@@ -5,7 +5,6 @@ import br.com.tex.hotelhapi.model.dto.ReservaInputDto;
 import br.com.tex.hotelhapi.model.dto.ReservaOutputDto;
 import br.com.tex.hotelhapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
