@@ -2,8 +2,7 @@ package br.com.tex.hotelhapi.controller;
 
 import br.com.tex.hotelhapi.model.ClasseUsuario;
 import br.com.tex.hotelhapi.model.Usuario;
-import br.com.tex.hotelhapi.model.dto.UsuarioInputDto;
-import br.com.tex.hotelhapi.model.dto.UsuarioOutputDto;
+import br.com.tex.hotelhapi.model.dto.*;
 import br.com.tex.hotelhapi.repository.ClasseUsuarioRepository;
 import br.com.tex.hotelhapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,12 @@ public class UsuarioController {
 
         return ResponseEntity.ok(usuarios.stream().map(usuario -> new UsuarioOutputDto(usuario)).toList());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity buscaPor(@PathVariable int id){
+        Usuario usuario = this.usuarioRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new UsuarioOutputDto(usuario));
+    }
     @PostMapping
     public ResponseEntity cadastra(@RequestBody @Valid UsuarioInputDto usuarioDto, UriComponentsBuilder uriBuilder){
         ClasseUsuario classeUsuario = this.classeUsuarioRepository.getReferenceById(usuarioDto.getClasseUsuarioId());
@@ -36,11 +41,6 @@ public class UsuarioController {
         return ResponseEntity
                 .created(uriBuilder.path("/usuarios/{id}").buildAndExpand(salvo.getId()).toUri())
                 .body(new UsuarioOutputDto(salvo));
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity buscaPor(@PathVariable int id){
-        Usuario usuario = this.usuarioRepository.getReferenceById(id);
-        return ResponseEntity.ok(new UsuarioOutputDto(usuario));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity deletaPor(@PathVariable int id){
@@ -57,5 +57,12 @@ public class UsuarioController {
         Usuario alterado = this.usuarioRepository.save(usuario);
 
         return ResponseEntity.ok(new UsuarioOutputDto(alterado));
+    }
+    @GetMapping("/{id}/reservas")
+    public ResponseEntity buscaReservaPorUsuario(@PathVariable int id){
+        Usuario usuario = this.usuarioRepository.getReferenceById(id);
+        ReservaPorUsuarioOutputDto dto = new ReservaPorUsuarioOutputDto(usuario);
+
+        return ResponseEntity.ok(dto);
     }
 }

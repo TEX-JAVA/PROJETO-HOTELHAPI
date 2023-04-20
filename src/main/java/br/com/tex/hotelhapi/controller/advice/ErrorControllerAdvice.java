@@ -21,7 +21,7 @@ public class ErrorControllerAdvice {
         return ResponseEntity.notFound().build();
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> erroBadRequest(MethodArgumentNotValidException ex){
+    public ResponseEntity erroBadRequest(MethodArgumentNotValidException ex){
         List<ErroOutputDto> errosDto =
                 ex.getFieldErrors().stream()
                         .map(e -> new ErroOutputDto(e.getField(),e.getDefaultMessage())).toList();
