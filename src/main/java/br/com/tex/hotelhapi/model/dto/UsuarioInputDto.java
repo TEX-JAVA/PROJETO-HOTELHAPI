@@ -18,6 +18,7 @@ public class UsuarioInputDto {
     private String senha;
     @NotNull
     private Integer classeUsuarioId;
+
     public Usuario toUsuario(ClasseUsuario classeUsuario){
         Usuario usuario = new Usuario();
         usuario.setNome(this.getNome());

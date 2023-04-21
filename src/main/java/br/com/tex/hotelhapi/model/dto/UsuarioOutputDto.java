@@ -2,7 +2,6 @@ package br.com.tex.hotelhapi.model.dto;
 
 import br.com.tex.hotelhapi.model.Usuario;
 import lombok.Getter;
-
 @Getter
 public class UsuarioOutputDto {
     private Integer id;

@@ -2,12 +2,9 @@ package br.com.tex.hotelhapi.model.dto;
 
 import br.com.tex.hotelhapi.model.*;
 import lombok.Getter;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-
 @Getter
 public class ReservaOutputDto {
     private Integer numeroDaReserva;
@@ -18,7 +15,7 @@ public class ReservaOutputDto {
     private LocalDate dataEntrada;
     private LocalDate dataSaida;
     private BigDecimal total;
-    private List<ServicoOutputDto> servicos;
+    private List<ServicoReservaOutputDto> servicos;
 
     public ReservaOutputDto(Reserva reserva){
         this.numeroDaReserva = reserva.getId();
@@ -29,6 +26,6 @@ public class ReservaOutputDto {
         this.dataEntrada = reserva.getDataEntrada();
         this.dataSaida = reserva.getDataSaida();
         this.total = reserva.getTotal();
-        this.servicos = reserva.getServicos().stream().map(servico -> new ServicoOutputDto(servico)).toList();
+        this.servicos = reserva.getServicos().stream().map(servico -> new ServicoReservaOutputDto(servico)).toList();
     }
 }

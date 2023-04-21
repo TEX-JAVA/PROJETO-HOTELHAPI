@@ -24,7 +24,8 @@ public class UsuarioController {
         if(usuarios.size() == 0)
             return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok(usuarios.stream().map(usuario -> new UsuarioOutputDto(usuario)).toList());
+        return ResponseEntity.ok(usuarios.stream()
+                .map(usuario -> new UsuarioOutputDto(usuario)).toList());
     }
     @GetMapping("/{id}")
     public ResponseEntity buscaPor(@PathVariable int id){
@@ -59,7 +60,7 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}/reservas")
-    public ResponseEntity buscaReservaPorUsuario(@PathVariable int id){
+    public ResponseEntity buscaReservasPorUsuario(@PathVariable int id){
         Usuario usuario = this.usuarioRepository.getReferenceById(id);
         ReservaPorUsuarioOutputDto dto = new ReservaPorUsuarioOutputDto(usuario);
 

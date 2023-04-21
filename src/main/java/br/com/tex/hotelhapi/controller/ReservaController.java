@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.util.List;
-
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
@@ -29,9 +27,9 @@ public class ReservaController {
         if(reservas.size() == 0)
             return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok(reservas.stream().map(reserva -> new ReservaOutputDto(reserva)).toList());
+        return ResponseEntity.ok(reservas.stream()
+                .map(reserva -> new ReservaOutputDto(reserva)).toList());
     }
-
     @GetMapping("/{id}")
     public ResponseEntity buscaPor(@PathVariable int id){
         Reserva reserva = this.reservaRepository.getReferenceById(id);

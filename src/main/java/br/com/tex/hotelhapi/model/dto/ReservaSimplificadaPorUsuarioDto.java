@@ -2,7 +2,6 @@ package br.com.tex.hotelhapi.model.dto;
 
 import br.com.tex.hotelhapi.model.Reserva;
 import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +14,7 @@ public class ReservaSimplificadaPorUsuarioDto {
     private LocalDate dataEntrada;
     private LocalDate dataSaida;
     private BigDecimal total;
-    private List<ServicoOutputDto> servicos;
+    private List<ServicoReservaOutputDto> servicos;
 
     public ReservaSimplificadaPorUsuarioDto(Reserva reserva){
         this.numeroDaReserva = reserva.getId();
@@ -25,6 +24,6 @@ public class ReservaSimplificadaPorUsuarioDto {
         this.dataEntrada = reserva.getDataEntrada();
         this.dataSaida = reserva.getDataSaida();
         this.total = reserva.getTotal();
-        this.servicos = reserva.getServicos().stream().map(servico -> new ServicoOutputDto(servico)).toList();
+        this.servicos = reserva.getServicos().stream().map(servico -> new ServicoReservaOutputDto(servico)).toList();
     }
 }
