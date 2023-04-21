@@ -5,7 +5,9 @@ import br.com.tex.hotelhapi.model.Usuario;
 import br.com.tex.hotelhapi.model.dto.*;
 import br.com.tex.hotelhapi.repository.ClasseUsuarioRepository;
 import br.com.tex.hotelhapi.repository.UsuarioRepository;
+import br.com.tex.hotelhapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,6 +18,8 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioService usuarioService;
     @Autowired
     private ClasseUsuarioRepository classeUsuarioRepository;
     @GetMapping
@@ -37,6 +41,12 @@ public class UsuarioController {
     public ResponseEntity cadastra(@RequestBody @Valid UsuarioInputDto usuarioDto, UriComponentsBuilder uriBuilder){
         ClasseUsuario classeUsuario = this.classeUsuarioRepository.getReferenceById(usuarioDto.getClasseUsuarioId());
         Usuario usuario = usuarioDto.toUsuario(classeUsuario);
+
+        if(this.usuarioService.emailExiste(usuario.getEmail()) != null){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST).body("E-mail já cadastrado");
+        }
+
         Usuario salvo = this.usuarioRepository.save(usuario);
 
         return ResponseEntity
@@ -58,6 +68,14 @@ public class UsuarioController {
         this.usuarioRepository.deleteById(usuario.getId());
 
         return ResponseEntity.ok().build();
+    }
+    @PostMapping("/{email}/validar-senha")
+    public ResponseEntity validarSenha(@PathVariable String email, @RequestBody UsuarioLoginInputDto usuarioLoginInputDto){
+        boolean senhaValida = usuarioService.validarSenha(usuarioLoginInputDto);
+        return senhaValida ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Senha Incorreta");
     }
     @GetMapping("/{id}/reservas")
     public ResponseEntity buscaReservasPorUsuario(@PathVariable int id){
