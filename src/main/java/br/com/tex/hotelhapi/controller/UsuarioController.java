@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.List;
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
