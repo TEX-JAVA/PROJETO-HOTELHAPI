@@ -74,7 +74,7 @@ public class UsuarioController {
     public ResponseEntity validarSenha(@PathVariable String email, @RequestBody UsuarioLoginInputDto usuarioLoginInputDto){
         boolean senhaValida = usuarioService.validarSenha(usuarioLoginInputDto);
         return senhaValida ?
-                ResponseEntity.ok().build() :
+                ResponseEntity.ok(new UsuarioOutputDto(usuarioService.emailExiste(usuarioLoginInputDto.getEmail()))) :
                 ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body("Senha Incorreta");
     }
