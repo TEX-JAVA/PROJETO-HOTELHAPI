@@ -70,7 +70,7 @@ public class UsuarioController {
 
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/{email}/validar-senha")
+    @PostMapping("/validar-senha")
     public ResponseEntity validarSenha(@RequestBody UsuarioLoginInputDto usuarioLoginInputDto){
         boolean senhaValida = usuarioService.validarSenha(usuarioLoginInputDto);
         return senhaValida ?
