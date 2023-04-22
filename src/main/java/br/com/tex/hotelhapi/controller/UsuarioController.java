@@ -71,7 +71,7 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
     @PostMapping("/{email}/validar-senha")
-    public ResponseEntity validarSenha(@PathVariable String email, @RequestBody UsuarioLoginInputDto usuarioLoginInputDto){
+    public ResponseEntity validarSenha(@RequestBody UsuarioLoginInputDto usuarioLoginInputDto){
         boolean senhaValida = usuarioService.validarSenha(usuarioLoginInputDto);
         return senhaValida ?
                 ResponseEntity.ok(new UsuarioOutputDto(usuarioService.emailExiste(usuarioLoginInputDto.getEmail()))) :
